@@ -158,13 +158,5 @@ module.exports = function(context){
         helper.applyPluginVarsToPlists(pluginVariables, PLATFORM.IOS);
         helper.ensureEncodedAppIdInUrlSchemes(PLATFORM.IOS)
         podFileModified = helper.applyPluginVarsToPodfile(pluginVariables, PLATFORM.IOS) || podFileModified;
-
-        if(podFileModified){
-            utilities.log('Updating installed Pods');
-            execSync('pod install', {
-                cwd: path.resolve(PLATFORM.IOS.platformDir),
-                encoding: 'utf8'
-            });
-        }
     }
 };
