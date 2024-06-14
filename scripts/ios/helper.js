@@ -403,7 +403,13 @@ end
         if(pluginVariables['IOS_USE_PRECOMPILED_FIRESTORE_POD'] === 'true'){
             var standardFirestorePodMatches = podFileContents.match(standardFirestorePodRegEx);
             if(standardFirestorePodMatches){
-                podFileContents = podFileContents.replace(standardFirestorePodMatches[0], prebuiltFirestorePodTemplate.replace('{version}', standardFirestorePodMatches[1]));
+                podFileContents = podFileContents.replace(
+                    standardFirestorePodMatches[0],
+                    prebuiltFirestorePodTemplate.replace(
+                        '{version}',
+                        pluginVariables['IOS_FIREBASE_SDK_VERSION'] ? pluginVariables['IOS_FIREBASE_SDK_VERSION'] : standardFirestorePodMatches[1]
+                    )
+                );
                 podFileModified = true;
                 utilities.log("Configured Podfile for pre-built Firestore pod");
             }
