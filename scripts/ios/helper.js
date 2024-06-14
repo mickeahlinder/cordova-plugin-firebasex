@@ -347,7 +347,13 @@ end
                     matches.forEach((match) => {
                         var currentVersion = match.match(versionRegex)[0];
                         if(!match.match(pluginVariables['IOS_FIREBASE_SDK_VERSION'])){
-                            podFileContents = podFileContents.replace(match, match.replace(currentVersion, pluginVariables['IOS_FIREBASE_SDK_VERSION']));
+                            podFileContents = podFileContents.replace(
+                                match,
+                                match.replace(
+                                    currentVersion,
+                                    `${pluginVariables['IOS_FIREBASE_SDK_VERSION']}${currentVersion.endsWith("-beta")?'-beta':''}`
+                                )
+                            );
                             podFileModified = true;
                         }
                     });
